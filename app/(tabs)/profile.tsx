@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Index() {
-	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>Home</Text>
-		</View>
-	);
+export default function Profile() {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>Profile</Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
