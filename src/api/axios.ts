@@ -2,7 +2,7 @@ import axios, { CreateAxiosDefaults } from "axios";
 import { authTokenService } from "../shared/services/authTokenService";
 
 const axiosOptions: CreateAxiosDefaults = {
-	baseURL: "http://localhost:3001",
+	baseURL: "http://localhost:3000",
 	headers: { "Content-Type": "application/json", Accept: "application/json" },
 	withCredentials: true,
 };

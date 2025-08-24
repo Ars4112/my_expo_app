@@ -1,25 +1,27 @@
 import { BackButton } from "@/src/shared/ui/buttons/backButton";
 import { Stack } from "expo-router";
-import "react-native-reanimated";
 
-export default function AuthLayout() {
+export default function ProfileLayout() {
 	return (
 		<Stack
 			screenOptions={{
-				headerShown: true,
-				headerTitle: "",
-				headerBackTitle: "",
 				headerBackVisible: true,
 				headerStyle: {
 					backgroundColor: "#25292e",
 				},
 				headerTintColor: "#fff",
-				headerLeft: ()=> <BackButton path="/login" />,
+
 				headerShadowVisible: false,
 			}}
 		>
-			<Stack.Screen name="login" options={{ headerShown: false }} />
-			<Stack.Screen name="register" />
+			<Stack.Screen
+				name="index"
+				options={{
+					title: "Редактирование",
+					headerTitleAlign: "center",
+					headerLeft: () => <BackButton path="/(tabs)/profile" />,
+				}}
+			/>
 		</Stack>
 	);
 }

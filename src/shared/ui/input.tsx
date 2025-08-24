@@ -1,11 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { StyleSheet, TextInput, TextInputProps, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TextInput, TextInputProps, TouchableOpacity, View, Text } from "react-native";
 
 type Props = {
 	onChangeText: (value: string) => void;
 	onBlur: () => void;
 	value: string;
+	lable?: string;
 	placeholder?: string;
 	keyboardType?: TextInputProps["keyboardType"];
 	autoCapitalize?: TextInputProps["autoCapitalize"];
@@ -21,13 +22,16 @@ export const Input = (props: Props) => {
 		keyboardType = "default",
 		autoCapitalize = "none",
 		secureTextEntry = false,
+		style,
+		lable,
 		...rest
 	} = props;
 
 	return (
 		<View style={styles.container}>
+			{lable && <Text style={styles.label}>{lable}</Text>}
 			<TextInput
-				style={styles.input}
+				style={[styles.input, style]}
 				placeholder={placeholder}
 				placeholderTextColor="#999"
 				onChangeText={onChangeText}
@@ -50,13 +54,20 @@ export const Input = (props: Props) => {
 const styles = StyleSheet.create({
 	container: {
 		position: "relative",
-		marginBottom: 10,
+		// marginBottom: 10,
+	},
+	label: {
+		fontSize: 14,
+		color: "#999",
+		fontWeight: "500",
+		marginBottom: 8,
 	},
 	input: {
 		borderWidth: 1,
 		borderColor: "#dddddd",
 		padding: 10,
 		color: "#dddddd",
+		borderRadius: 12,
 	},
 	iconContainer: {
 		position: "absolute",

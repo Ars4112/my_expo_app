@@ -1,11 +1,12 @@
 import { useLoginMutation } from "@/src/api/auth/login.mutate";
 import { AuthRoutes } from "@/src/shared/constants/routes/auth";
+import { LinkButton } from "@/src/shared/ui/buttons/linkButton";
+import { TouchableButton } from "@/src/shared/ui/buttons/touchableButton";
 import { Input } from "@/src/shared/ui/input";
 import { ILoginRequest } from "@/src/types/auth/loginRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { z } from "zod";
 
 const schema = z.object({
@@ -36,49 +37,46 @@ export const LoginForm = () => {
 			<Text style={styles.title}>Логин</Text>
 
 			<View>
-				<Controller
-					control={control}
-					name="email"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input
-							placeholder="Email"
-							onChangeText={onChange}
-							onBlur={onBlur}
-							value={value}
-							keyboardType="email-address"
-							autoCapitalize="none"
-						/>
-					)}
-				/>
-				{errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+				<View style={styles.inputWrapper}>
+					<Controller
+						control={control}
+						name="email"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input
+								placeholder="Email"
+								onChangeText={onChange}
+								onBlur={onBlur}
+								value={value}
+								keyboardType="email-address"
+								autoCapitalize="none"
+							/>
+						)}
+					/>
+					{errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
-				<Controller
-					control={control}
-					name="password"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input
-							placeholder="Пароль"
-							onChangeText={onChange}
-							onBlur={onBlur}
-							value={value}
-							secureTextEntry
-						/>
-					)}
-				/>
-				{errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+					<Controller
+						control={control}
+						name="password"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input placeholder="Пароль" onChangeText={onChange} onBlur={onBlur} value={value} secureTextEntry />
+						)}
+					/>
+					{errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+				</View>
 
-				<TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button} disabled={isSubmitting}>
+				<TouchableButton onPress={handleSubmit(onSubmit)} style={styles.button} disabled={isSubmitting}>
 					<Text style={styles.buttonText}>Залогиниться</Text>
-				</TouchableOpacity>
-				<Link style={styles.link} href={AuthRoutes.REGISTER}>
-					Регистрация
-				</Link>
+				</TouchableButton>
+				<LinkButton href={AuthRoutes.REGISTER}>Регистрация</LinkButton>
 			</View>
 		</>
 	);
 };
 
 const styles = StyleSheet.create({
+	inputWrapper: {
+		gap: 10,
+	},
 	input: {
 		marginBottom: 10,
 		borderWidth: 1,
@@ -93,9 +91,9 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		color: "#dddddd",
 	},
-	form: {
-		width: "100%",
-	},
+	// form: {
+	// 	width: "100%",
+	// },
 	button: {
 		marginTop: 20,
 		width: "100%",
@@ -113,11 +111,5 @@ const styles = StyleSheet.create({
 		color: "red",
 		marginBottom: 8,
 		marginLeft: 16,
-	},
-	link: {
-		color: "#dddddd",
-		marginVertical: 15,
-		textAlign: "center",
-		textDecorationLine: "underline",
 	},
 });

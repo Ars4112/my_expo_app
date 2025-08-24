@@ -1,6 +1,7 @@
 import { useLogOutMutation } from "@/src/api/auth/logOut.mutate";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableButton } from "./touchableButton";
 
 export const LogOutButton = () => {
 	const { mutate } = useLogOutMutation();
@@ -10,14 +11,14 @@ export const LogOutButton = () => {
 	};
     
 	return (
-		<TouchableOpacity onPress={logoutHandler}>
-			<Ionicons name="exit-outline" size={24} color="#ffd33d" style={styles.icon} />
-		</TouchableOpacity>
+		<TouchableButton onPress={logoutHandler} variant={'transparent'} style={styles.button}>
+			<Ionicons name="exit-outline" size={24} color="#ffd33d"  />
+		</TouchableButton>
 	);
 };
 
 const styles = StyleSheet.create({
-	icon: {
-		marginRight: 10,
+	button: {
+		padding: 10,
 	},
 });

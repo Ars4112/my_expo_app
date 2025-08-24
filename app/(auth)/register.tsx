@@ -1,7 +1,7 @@
 import { RegistrationForm } from "@/src/features/form/registrationForm";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 
-export default function Login() {
+export default function Registration() {
 	return (
 		<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
 			<ScrollView contentContainerStyle={styles.scrollContainer}>

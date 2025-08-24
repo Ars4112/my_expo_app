@@ -3,12 +3,14 @@ import { authTokenService } from "@/src/shared/services/authTokenService";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { api } from "../axios";
+import { QueryKeys } from "@/src/shared/constants/queryKeys";
+import { Endpoints } from "@/src/shared/constants/endpoints";
 
 export const useLogOutMutation = () => {
 	return useMutation({
-		mutationKey: ["logOut"],
+		mutationKey: [QueryKeys.logOut],
 		mutationFn: () => {
-			return api.post<{ message: string }>("/auth/logout");
+			return api.post<{ message: string }>(Endpoints.logOut);
 		},
 		onSuccess: async () => {
 			try {

@@ -1,9 +1,10 @@
 import { useRegisterMutation } from "@/src/api/auth/register.mutate";
+import { TouchableButton } from "@/src/shared/ui/buttons/touchableButton";
 import { Input } from "@/src/shared/ui/input";
 import { IRegisterRequest } from "@/src/types/auth/registerRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { z } from "zod";
 
 const schema = z.object({
@@ -40,59 +41,64 @@ export const RegistrationForm = () => {
 		<>
 			<Text style={styles.title}>Регистрация</Text>
 
-			<View style={styles.form}>
-				<Controller
-					control={control}
-					name="first_name"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input placeholder="Имя" onChangeText={onChange} onBlur={onBlur} value={value} />
-					)}
-				/>
-				{errors.first_name && <Text style={styles.error}>{errors.first_name.message}</Text>}
+			<View>
+				<View style={styles.inputWrapper}>
+					<Controller
+						control={control}
+						name="first_name"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input placeholder="Имя" onChangeText={onChange} onBlur={onBlur} value={value} />
+						)}
+					/>
+					{errors.first_name && <Text style={styles.error}>{errors.first_name.message}</Text>}
 
-				<Controller
-					control={control}
-					name="last_name"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input placeholder="Фамилия" onChangeText={onChange} onBlur={onBlur} value={value} />
-					)}
-				/>
-				{errors.last_name && <Text style={styles.error}>{errors.last_name.message}</Text>}
+					<Controller
+						control={control}
+						name="last_name"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input placeholder="Фамилия" onChangeText={onChange} onBlur={onBlur} value={value} />
+						)}
+					/>
+					{errors.last_name && <Text style={styles.error}>{errors.last_name.message}</Text>}
 
-				<Controller
-					control={control}
-					name="email"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input
-							placeholder="Email"
-							onChangeText={onChange}
-							onBlur={onBlur}
-							value={value}
-							keyboardType="email-address"
-							autoCapitalize="none"
-						/>
-					)}
-				/>
-				{errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+					<Controller
+						control={control}
+						name="email"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input
+								placeholder="Email"
+								onChangeText={onChange}
+								onBlur={onBlur}
+								value={value}
+								keyboardType="email-address"
+								autoCapitalize="none"
+							/>
+						)}
+					/>
+					{errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
-				<Controller
-					control={control}
-					name="password"
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Input placeholder="Пароль" onChangeText={onChange} onBlur={onBlur} value={value} secureTextEntry />
-					)}
-				/>
-				{errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+					<Controller
+						control={control}
+						name="password"
+						render={({ field: { onChange, onBlur, value } }) => (
+							<Input placeholder="Пароль" onChangeText={onChange} onBlur={onBlur} value={value} secureTextEntry />
+						)}
+					/>
+					{errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+				</View>
 
-				<TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button} disabled={isSubmitting}>
+				<TouchableButton onPress={handleSubmit(onSubmit)} style={styles.button} disabled={isSubmitting}>
 					<Text style={styles.buttonText}>Зарегистрироваться</Text>
-				</TouchableOpacity>
+				</TouchableButton>
 			</View>
 		</>
 	);
 };
 
 const styles = StyleSheet.create({
+	inputWrapper: {
+		gap: 10,
+	},
 	input: {
 		marginBottom: 10,
 		borderWidth: 1,

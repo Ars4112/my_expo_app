@@ -1,10 +1,10 @@
 import { AuthWrapper } from "@/src/features/authWrapper";
-import { LogOutButton } from "@/src/shared/ui/logOutButton";
+import { LogOutButton } from "@/src/shared/ui/buttons/logOutButton";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { Platform } from "react-native";
 
 export default function TabsLayout() {
-
 	return (
 		<AuthWrapper>
 			<Tabs
@@ -12,15 +12,20 @@ export default function TabsLayout() {
 					tabBarActiveTintColor: "#ffd33d",
 					headerStyle: {
 						backgroundColor: "#25292e",
+						height: Platform.select({
+							ios: 110,
+							android: 110,
+							default: 64, 
+						}),
 					},
 					headerShadowVisible: false,
 					headerTintColor: "#fff",
 					tabBarStyle: {
 						backgroundColor: "#25292e",
-						borderTopColor: "#25292e",
+						borderTopColor: "#7c7c7d",
 						borderTopWidth: 1,
 					},
-					headerRight: ()=> <LogOutButton/>
+					headerRight: () => <LogOutButton />,
 				}}
 			>
 				<Tabs.Screen
